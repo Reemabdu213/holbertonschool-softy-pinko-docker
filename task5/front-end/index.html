@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Softy Pinko - Task 5</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding-top: 50px; }
+        #api-response { color: pink; font-size: 24px; font-weight: bold; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h1>Welcome to Softy Pinko</h1>
+    <div id="api-response">Loading message from API...</div>
+
+    <script>
+        $(document).ready(function() {
+            // هذا هو الجزء المهم: نطلب من المسار /api/hello 
+            // البروكسي سيتولى تحويل الطلب إلى http://back-end:5252/api/hello
+            $.ajax({
+                url: "/api/hello", 
+                method: "GET",
+                success: function(data) {
+                    // إذا كان الباك إند يرجع نصاً مباشراً أو JSON
+                    $("#api-response").text(data);
+                },
+                error: function() {
+                    $("#api-response").text("Error: Could not connect to API via Proxy");
+                }
+            });
+        });
+    </script>
+</body>
+</html>
